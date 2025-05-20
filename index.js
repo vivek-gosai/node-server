@@ -2,31 +2,112 @@ let http = require('http');
 let fs = require('fs');
 require('dotenv').config()
 
-
-fs.writeFile("index.html",
-    `
+const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+
+    *{
+        font-family:sans-serif;
+    }
+    
+    .header {
+  overflow: hidden;
+  background-color:rgb(0, 0, 0);
+  padding: 20px 10px;
+}
+
+.heightlight{
+color:#4e9a40;
+}
+
+.header a {
+  float: left;
+  color: whitel;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+
+.header a.logo {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
+.header a {
+  color: white;
+  font-weight:800;
+}
+
+
+.header-right {
+  float: right;
+}
+.container{
+    width:1320px;
+    margin:0px auto;
+}
+.row{
+    display:flex;
+
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+    </style>
 </head>
 <body>
-    <h1 style = "color : red">hello world 123</h1>
+<div class="header">
+  <a href="#default" class="logo"><span class="heightlight">N</span>ode<span class="heightlight">.</span>J<span class="heightlight">s</span></a>
+  <div class="header-right">
+    <a class="active" href="#home"><span class="heightlight">H</span>ome</a>
+    <a href="#contact"><span class="heightlight">C</span>ontact</a>
+    <a href="#about"><span class="heightlight">S</span>ervice</a>
+    <a href="#about"><span class="heightlight">B</span>log</a>
+    <a href="#about"><span class="heightlight">A</span>bout</a>
+  </div>
+</div>       
+    
+<div class="container">
+    <div class=""></div>
+</div>
 </body>
 </html>
-    `,
-    (err) => {
-        if (err) throw err;
-    }
+    `
+
+fs.writeFile("index.html", htmlContent, (err) => {
+    if (err) throw err;
+}
 )
 
 http.createServer((req, res) => {
-
     fs.readFile('index.html', "utf8", (err, data) => {
         if (err) {
-        throw err    
+            throw err
         }
         res.writeHead(200, { "content-type": 'text/html' });
         res.write(data);
